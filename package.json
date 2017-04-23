@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Ciro César Martins Spaciari Jr"
+  },
+  "contributors": [
+    {
+      "name": "Ciro César Martins Spaciari Jr",
+      "email": "ciro.spaciari@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "name": "jscomet.decorators",
+  "version": "1.0.0",
+  "keywords": [
+    "private",
+    "decorators",
+	"decorator",
+    "project",
+    "oop",
+    "oo",
+    "es2015",
+    "es2016",
+    "es7",
+    "6to5",
+    "jscomet",
+    "classes",
+    "es6",
+    "modules",
+    "var",
+    "compiler",
+    "library",
+    "generators",
+    "transform"
+  ],
+  "description": "A easy way and examples of implement decorators using jscomet.",
+  "main": "./jscomet.decorators/bin/jscomet.decorators.js",
+  "devDependencies": {
+    "jscomet": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/cirospaciari/jscomet.decorators"
+  }
+}

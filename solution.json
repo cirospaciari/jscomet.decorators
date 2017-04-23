@@ -1,0 +1,45 @@
+{
+    "Projects": [
+        {
+            "Name": "jscomet.decorators",
+            "Source": "jscomet.decorators/src",
+            "Bin": "jscomet.decorators/bin",
+            "IgnorePathsOnTranslate": [
+                "libs",
+                "node_modules"
+            ],
+            "Type": "library",
+            "MainFile": "jscomet.decorators.js"
+        },
+        {
+            "Name": "jscomet.decorators.test",
+            "Source": "jscomet.decorators.test/src",
+            "Bin": "jscomet.decorators.test/bin",
+            "IgnorePathsOnTranslate": [
+                "libs",
+                "node_modules"
+            ],
+            "Type": "app",
+            "MainFile": "jscomet.decorators.test.js",
+            "References": [
+                {
+                    "Project": "jscomet.decorators",
+                    "Out": "./libs/"
+                }
+            ]
+        }
+    ],
+    "Options": {
+        "translateModule": true,
+        "translateExports": true,
+        "translateImports": true,
+        "translateClass": true,
+        "translateStringTemplates": true,
+        "translateArrowFunctions": true,
+        "translateLetAndConst": true,
+        "translateFunctions": true,
+        "translateTypedArrays": true,
+        "translateAsyncFunctions": true,
+        "translateCodeAfterImport": false
+    }
+}
