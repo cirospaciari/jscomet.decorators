@@ -1,4 +1,4 @@
-# Decoratos using JSComet
+# Decorators using JSComet
  
 Here are some examples of implementing decorators using jscomet.
 The implementation of decorators used by js comet does not follow ES6 / ES7 in the future adaptations will be made for compatibility
