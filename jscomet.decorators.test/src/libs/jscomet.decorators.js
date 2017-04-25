@@ -402,6 +402,435 @@ return module.exports;
 }
 };
 
+z____memoryImport['/core/HttpRequestDecorator.js'] = {
+ cache: null, code: function(){
+ var module = {exports: {}};
+
+var ____imported = JSComet.include('./core/Decorator.js', false, z____memoryImport);
+
+var Decorator = ____imported.default;;
+
+var HttpRequestDecorator = (function(Decorator){
+"use strict";
+
+var ___privateStatic___ = {};
+function HttpRequestDecorator(){
+	JSComet.checkClass(this, HttpRequestDecorator);
+	var ___private___ = {};
+	var ___self___ = this;
+	var ___super___ = null;
+
+	var __callSuperConstructor__ = function(){
+
+		Decorator.apply(___self___, arguments);
+		___super___ = JSComet.wrapSuper(___self___);
+		___defineAllProperties___.call(___self___);
+	}
+
+		var ___defineAllProperties___ = function(){
+
+___self___.onFunction =  (function onFunction(target,  key,  descriptor,  superDescriptor){
+  var  z____return = (function onFunction(target, key, descriptor, superDescriptor){
+        
+
+    var url = this.url;
+    if (target && target.constructor)
+      url = url.replace("@className", target.constructor.name);
+    else
+      url = url.replace("@className", "");
+
+    url = url.replace("@methodName", key);
+
+    
+    while (url.indexOf("@setting") != -1) {
+      var index = url.indexOf("@setting");
+      var barra = url.indexOf('/');
+      if (barra == -1)
+        barra = url.indexOf('\\');
+      if (barra == -1)
+        barra = url.indexOf('?');
+      if (barra == -1)
+        barra = url.length;
+
+      var appSetting = url.substring(index, barra);
+
+      var value = ___privateStatic___.settings[appSetting.split(':').pop()];
+
+      url = url.replace(appSetting, value || "");
+    }
+    var headers = {};
+    for (var i in this.options.headers)
+      headers[i] = this.options.headers[i];
+    var options = this.options;
+
+    var self = this;
+    
+    function request(url, options, values) {
+      if (typeof XMLHttpRequest != "undefined") {
+        return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
+          var xhr = new XMLHttpRequest();
+          xhr.open(options.method, url);
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              if ((options.responseType || "").toLowerCase() == "json") {
+
+                try {
+                  resolve(JSON.parse(xhr.responseText));
+                } catch (ex) {
+                  reject({
+                    exception: ex,
+                    response: xhr
+                  });
+                }
+              } else {
+                resolve(xhr.responseText);
+              }
+            } else {
+              reject({
+                exception: xhr.responseText,
+                response: xhr
+              });
+            }
+          };
+          xhr.timeout = options.timeout;
+          if (options.headers) {
+            for (var i in options.headers) {
+              xhr.setRequestHeader(i, options.headers[i]);
+            }
+          }
+          if (values) {
+            switch ((options.contentType || "").toLowerCase()) {
+            case "json":
+              xhr.send(JSON.stringify(values));
+              break;
+            default:
+              var form = new FormaData();
+              for (var i in values) {
+                form.append(i, values[i]);
+              }
+              xhr.send(form);
+              break;
+            }
+          } else {
+            xhr.send();
+          }
+        }).apply(_this,arguments)});})(this)));
+      } else {
+        return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
+          var config = {
+            url: url,
+            headers: headers,
+            method: options.method,
+            timeout: options.timeout
+          };
+          switch ((options.contentType || "").toLowerCase()) {
+          case "json":
+            config.json = values;
+            break;
+          default:
+            config.form = values;
+            break;
+          }
+
+          require("request")(config, ((function(_this){ return (function(){return (function (error, response, body){
+            if (!error && response.statusCode == 200) {
+              if ((options.responseType || "").toLowerCase() == "json" && response.headers["content-type"] != "application/json") {
+                try {
+                  resolve(JSON.parse(body));
+                } catch (ex) {
+                  reject({
+                    exception: ex,
+                    response: response
+                  });
+                }
+              } else {
+                resolve(body);
+              }
+            } else {
+              reject({
+                exception: error,
+                response: response
+              });
+            }
+          }).apply(_this,arguments)});})(this)));
+        }).apply(_this,arguments)});})(this)));
+      }
+    }
+    return this.cloneDescriptor(descriptor, {
+      value: function () {
+        var values = {};
+
+        function replaceUrlHeaderParameter(name, value) {
+          if (url.indexOf("{" + name + "}") != -1)
+            url = url.replace("{" + name + "}", encodeURIComponent((value || "").toString()));
+          else if (headers) {
+            for (var i in headers) {
+              if (headers[i] == "{" + name + "}") {
+                headers[i] = value;
+              }
+            }
+          }
+        }
+        
+        for (var i = 0; i < arguments.length; i++) {
+          if (typeof arguments[i] == "object") {
+            for (var j in arguments[i]) {
+              
+              values[j] = arguments[i][j];
+              replaceUrlHeaderParameter(j, arguments[i][j]);
+            }
+          } else { 
+            replaceUrlHeaderParameter(i, arguments[i]);
+          }
+        }
+        return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
+          HttpRequestDecorator.lastError = null;
+          request(url, options, values).then(((function(_this){ return (function(){return (function (response){
+            resolve(response);
+          }).apply(_this,arguments)});})(this)))["catch"](((function(_this){ return (function(){return (function (error){
+            HttpRequestDecorator.lastError = error;
+            resolve(descriptor.value.apply(this, arguments));
+          }).apply(_this,arguments)});})(this)));
+        }).apply(_this,arguments)});})(this)));
+      }
+    });
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+		};
+	var __callThisConstructor__ = function (){
+		(function(){
+if(arguments.length == 1){
+  var  z____return = (function constructor(url){
+
+
+if((url != null) &&(typeof url != 'string'))
+ throw "HttpRequestDecorator#constructor - the parameter 'url' must be 'string'";
+
+        
+    __callThisConstructor__.call(this,url, null);
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;}
+if(arguments.length == 2){
+  var  z____return = (function constructor(url, options){
+
+
+if((url != null) &&(typeof url != 'string'))
+ throw "HttpRequestDecorator#constructor - the parameter 'url' must be 'string'";
+
+if((options != null) &&(typeof options != 'object'))
+ throw "HttpRequestDecorator#constructor - the parameter 'options' must be 'object'";
+
+        
+    if(typeof Decorator != 'undefined') __callSuperConstructor__.call(this);
+    this.name = "httpRequest";
+    this.url = url;
+    var defaultOptions = {
+      method: "get",
+      responseType: "text",
+      contentType: "json",
+      headers: {}
+    };
+
+    if (options) {
+      for (var i in options) {
+        defaultOptions[i] = options[i];
+      }
+    }
+    this.options = defaultOptions;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;}
+throw 'HttpRequestDecorator#constructor - No overload function takes '+arguments.length+' arguments';
+		}).apply(___self___, arguments);
+
+	};
+return __callThisConstructor__.apply(___self___, arguments);}
+
+HttpRequestDecorator.loadSettings =  (function loadSettings(settings){
+  var  z____return = (function loadSettings(settings){
+
+
+if((settings != null) &&(typeof settings != 'object'))
+ throw "HttpRequestDecorator#loadSettings - the parameter 'settings' must be 'object'";
+
+        
+    ___privateStatic___.settings = settings;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+HttpRequestDecorator.getLastError =  (function getLastError(){
+  var  z____return = (function getLastError(){
+        
+    return HttpRequestDecorator.lastError;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+___privateStatic___.settings =  {};
+HttpRequestDecorator.lastError =  null;
+JSComet.inherits(HttpRequestDecorator, Decorator);
+
+return HttpRequestDecorator;
+})(Decorator);
+var httpRequest = Decorator.decorate(HttpRequestDecorator);
+httpRequest.loadSettings = HttpRequestDecorator.loadSettings;
+httpRequest.getLastError = HttpRequestDecorator.getLastError;
+
+module.exports['default'] = httpRequest;
+
+
+
+
+
+
+
+
+return module.exports;
+}
+};
+
+z____memoryImport['/core/MemoryCacheDecorator.js'] = {
+ cache: null, code: function(){
+ var module = {exports: {}};
+
+var ____imported = JSComet.include('./core/Decorator.js', false, z____memoryImport);
+
+var Decorator = ____imported.default;;
+
+var MemoryCacheDecorator = (function(Decorator){
+"use strict";
+
+var ___privateStatic___ = {};
+function MemoryCacheDecorator(){
+	JSComet.checkClass(this, MemoryCacheDecorator);
+	var ___private___ = {};
+	var ___self___ = this;
+	var ___super___ = null;
+
+	var __callSuperConstructor__ = function(){
+
+		Decorator.apply(___self___, arguments);
+		___super___ = JSComet.wrapSuper(___self___);
+		___defineAllProperties___.call(___self___);
+	}
+
+		var ___defineAllProperties___ = function(){
+
+___self___.onFunction =  (function onFunction(target,  key,  descriptor,  superDescriptor){
+  var  z____return = (function onFunction(target, key, descriptor, superDescriptor){
+        
+    var cacheTemplate = (this.cacheKey)+"-"+(target.constructor.name)+"#"+(key);
+    var duration = this.duration;
+    var Cache = ___privateStatic___.Cache;
+    return this.cloneDescriptor(descriptor, {
+      value: function () {
+        var cacheKey = cacheTemplate + "("+ JSON.stringify(arguments) + ")";
+        if(Cache[cacheKey]){
+          if((new Date().getTime() - Cache[cacheKey].timeStamp) <= duration){
+            if(Cache[cacheKey].isPromise){
+              return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
+                  if(Cache[cacheKey].isRejected){
+                    reject.apply(null, Cache[cacheKey].value);
+                  }else{
+                    resolve.apply(null, Cache[cacheKey].value);
+                  }
+              }).apply(_this,arguments)});})(this)));
+            }else{
+              return Cache[cacheKey].value;
+            }
+          }
+        }
+        delete Cache[cacheKey];
+        var response = descriptor.value.apply(this, arguments);
+        if(response instanceof Promise){
+          return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
+            response.then(((function(_this){ return (function(){return (function (){
+              Cache[cacheKey] = {
+                  isPromise: true,
+                  timeStamp: new Date().getTime(),
+                  value: arguments,
+                  isRejected: false
+              };
+              resolve.apply(null, arguments);
+            }).apply(_this,arguments)});})(this)))["catch"](((function(_this){ return (function(){return (function (){
+              Cache[cacheKey] = {
+                  isPromise: true,
+                  timeStamp: new Date().getTime(),
+                  value: arguments,
+                  isRejected: true
+              };
+              reject.apply(null, arguments);
+            }).apply(_this,arguments)});})(this)));
+          }).apply(_this,arguments)});})(this)));
+        }else{
+          Cache[cacheKey] = {
+              isPromise: false,
+              timeStamp: new Date().getTime(),
+              value: response
+          };
+          return response;
+        }
+      }
+    });
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+		};
+	var __callThisConstructor__ = function (){
+		(function(){
+if(arguments.length == 0){
+  var  z____return = (function constructor(){
+        
+    __callThisConstructor__.call(this,1);
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;}
+if(arguments.length == 1){
+  var  z____return = (function constructor(duration){
+
+
+if((typeof duration != 'number') ||
+ duration !== parseInt(duration, 10)|| isNaN(duration)
+ || duration > 2147483647
+ || duration < -2147483648)
+ throw "MemoryCacheDecorator#constructor - the parameter 'duration' must be a integer between -2147483648 and 2147483647";
+
+        
+    if(typeof Decorator != 'undefined') __callSuperConstructor__.call(this);
+    this.name = "memoryCache";
+
+    this.cacheKey = ('xxxxxxxx-xxxx-yxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    }));
+
+    this.duration = duration;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;}
+throw 'MemoryCacheDecorator#constructor - No overload function takes '+arguments.length+' arguments';
+		}).apply(___self___, arguments);
+
+	};
+return __callThisConstructor__.apply(___self___, arguments);}
+
+MemoryCacheDecorator.clear =  (function clear(){
+  var  z____return = (function clear(){
+        
+
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+___privateStatic___.Cache =  {};
+JSComet.inherits(MemoryCacheDecorator, Decorator);
+
+return MemoryCacheDecorator;
+})(Decorator);
+var memoryCache = Decorator.decorate(MemoryCacheDecorator);
+
+module.exports['default'] = memoryCache;
+
+
+
+
+
+
+return module.exports;
+}
+};
+
 z____memoryImport['/core/SealedDecorator.js'] = {
  cache: null, code: function(){
  var module = {exports: {}};
@@ -464,22 +893,29 @@ return module.exports;
 };
 
 
-var ____imported = JSComet.include('./core/Decorator.js', false, z____memoryImport);
+var ____imported = JSComet.include('./core/Decorator', false, z____memoryImport);
 
 var Decorator = ____imported.default;;
 
-var ____imported = JSComet.include('./core/AbstractDecorator.js', false, z____memoryImport);
+var ____imported = JSComet.include('./core/AbstractDecorator', false, z____memoryImport);
 
 var AbstractDecorator = ____imported.default;;
 
-var ____imported = JSComet.include('./core/SealedDecorator.js', false, z____memoryImport);
+var ____imported = JSComet.include('./core/SealedDecorator', false, z____memoryImport);
 
 var SealedDecorator = ____imported.default;;
 
-var ____imported = JSComet.include('./core/DeprecatedDecorator.js', false, z____memoryImport);
+var ____imported = JSComet.include('./core/DeprecatedDecorator', false, z____memoryImport);
 
 var DeprecatedDecorator = ____imported.default;;
 
+var ____imported = JSComet.include('./core/HttpRequestDecorator', false, z____memoryImport);
+
+var httpRequest = ____imported.default;;
+
+var ____imported = JSComet.include('./core/MemoryCacheDecorator', false, z____memoryImport);
+
+var memoryCache = ____imported.default;;
 
 var abstract = Decorator.decorate(AbstractDecorator);
 module.exports.abstract = abstract;
@@ -490,6 +926,29 @@ module.exports.sealed = sealed;
 var deprecated = Decorator.decorate(DeprecatedDecorator);
 module.exports.deprecated = deprecated;
 
-		
+
+
+function httpPost(url, options){
+	options = options || {};
+	options["method"] = "POST";
+	return httpRequest(url, options);
+}
+function httpGet(url, options){
+	options = options || {};
+	options["method"] = "GET";
+	return httpRequest(url, options);
+}
+
+module.exports.httpRequest = httpRequest;
+
+
+module.exports.httpGet = httpGet;
+
+
+module.exports.httpPost = httpPost;
+
+
+module.exports.memoryCache = memoryCache;
+
 
 module.exports.Decorator = Decorator;
