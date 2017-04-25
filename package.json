@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "name": "jscomet.decorators",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "keywords": [
     "private",
     "decorators",
@@ -39,6 +39,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/cirospaciari/jscomet.decorators"
+    "url": "https://github.com/cirospaciari/jscomet.decorators.git"
   }
 }
