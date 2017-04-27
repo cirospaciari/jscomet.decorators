@@ -715,7 +715,7 @@ function MemoryCacheDecorator(){
 ___self___.onFunction =  (function onFunction(target,  key,  descriptor,  superDescriptor){
   var  z____return = (function onFunction(target, key, descriptor, superDescriptor){
         
-    var cacheTemplate = (this.cacheKey)+"-"+(target.constructor.name)+"#"+(key);
+    var cacheTemplate = (target.constructor.name)+"#"+(key);
     var duration = this.duration;
     var Cache = ___privateStatic___.Cache;
     return this.cloneDescriptor(descriptor, {
@@ -792,11 +792,6 @@ if((typeof duration != 'number') ||
         
     if(typeof Decorator != 'undefined') __callSuperConstructor__.call(this);
     this.name = "memoryCache";
-
-    this.cacheKey = ('xxxxxxxx-xxxx-yxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    }));
 
     this.duration = duration;
   }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);

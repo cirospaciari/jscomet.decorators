@@ -70,41 +70,41 @@ class Site {
   }
 }
 
-// var site = new Site();
-// for(var i = 0; i < 1000; i++)
-	// site.add();
+var site = new Site();
+for(var i = 0; i < 1000; i++)
+	site.add();
 
-// console.log("cached value", site.counter);
+console.log("cached value", site.counter);
 
-// setTimeout(function(){
-	// site.add();
-	// console.log("new cached value", site.add());
-// }, 1500);
-// site = new Site();
-// for(var i = 0; i < 1000; i++){
-	// site.addWithoutCache();
-// }
-// console.log("without cache value", site.counter);
+setTimeout(function(){
+	site.add();
+	console.log("new cached value", site.add());
+}, 1500);
+site = new Site();
+for(var i = 0; i < 1000; i++){
+	site.addWithoutCache();
+}
+console.log("without cache value", site.counter);
 
-// site = new Site();
-// var promises = [];
-// site.addAsync().then(function(){
-	// for(var i = 0; i < 1000; i++){
-	// promises.push(site.addAsync());
-// }
-// });
+site = new Site();
+var promises = [];
+site.addAsync().then(function(){
+	for(var i = 0; i < 1000; i++){
+	promises.push(site.addAsync());
+}
+});
 
 
-// Promise.all(promises).then(()=>{
-	// site.addAsync().then(function(counter){
-		// console.log("promise cached value", counter);
-	// });
-// })
+Promise.all(promises).then(()=>{
+	site.addAsync().then(function(counter){
+		console.log("promise cached value", counter);
+	});
+})
 
 
 //logTest(() => new Site().google("jscomet"));
 //new Site().google2({search: "jscomet"}, { name: "ciro" }).then((a)=> console.log("resposta!", a, typeof a));
-new Site().google("jscomet").then((a)=> console.log("resposta!", a, typeof a));
+// new Site().google("jscomet").then((a)=> console.log("resposta!", a, typeof a));
 
 //[TypeError: Test - Cannot construct abstract instances directly]
 // logTest(() => new Test());

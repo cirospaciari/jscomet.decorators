@@ -9,15 +9,10 @@ class MemoryCacheDecorator extends Decorator {
     super();
     this.name = "memoryCache";
 
-    this.cacheKey = ('xxxxxxxx-xxxx-yxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    }));
-
     this.duration = duration;
   }
   onFunction(target, key, descriptor, superDescriptor) {
-    var cacheTemplate = `${this.cacheKey}-${target.constructor.name}#${key}`;
+    var cacheTemplate = `${target.constructor.name}#${key}`;
     var duration = this.duration;
     var Cache = MemoryCacheDecorator.Cache;
     return this.cloneDescriptor(descriptor, {

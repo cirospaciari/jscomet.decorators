@@ -222,7 +222,7 @@ var desc = Object.getOwnPropertyDescriptor(this || Site, 'google');
 	
  var superDescriptor = null;
 	
-desc =httpRequest("@setting:httpBinTestGet?s={0}")(this, 'google', desc) || desc;
+desc =httpGet("@setting:httpBinTestGet?s={0}")(this, 'google', desc) || desc;
 	
 Object.defineProperty(this || Site, 'google', desc);
 }).call(___self___);
@@ -302,42 +302,41 @@ return __callThisConstructor__.apply(___self___, arguments);}
 return Site;
 })();
 
+var site = new Site();
+for(var i = 0; i < 1000; i++)
+	site.add();
+
+console.log("cached value", site.counter);
+
+setTimeout(function(){
+	site.add();
+	console.log("new cached value", site.add());
+}, 1500);
+site = new Site();
+for(var i = 0; i < 1000; i++){
+	site.addWithoutCache();
+}
+console.log("without cache value", site.counter);
+
+site = new Site();
+var promises = [];
+site.addAsync().then(function(){
+	for(var i = 0; i < 1000; i++){
+	promises.push(site.addAsync());
+}
+});
 
 
-	
-
-
-
-
-	
-	
-
-
-
-	
+Promise.all(promises).then(((function(_this){ return (function(){return (function (){
+	site.addAsync().then(function(counter){
+		console.log("promise cached value", counter);
+	});
+}).apply(_this,arguments)});})(this)))
 
 
 
 
 
-
-	
-	
-
-
-
-
-
-	
-		
-	
-
-
-
-
-
-new Site().google("jscomet").then(((function(_this){ return (function(){return (function (a){
-    return console.log("resposta!", a, typeof a);}).apply(_this,arguments)});})(this)));
 
 
 
