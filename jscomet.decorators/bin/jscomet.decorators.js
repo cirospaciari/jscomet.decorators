@@ -887,6 +887,141 @@ return module.exports;
 }
 };
 
+z____memoryImport['/core/UserInRuleDecorator.js'] = {
+ cache: null, code: function(){
+ var module = {exports: {}};
+
+var ____imported = JSComet.include('./core/Decorator.js', false, z____memoryImport);
+
+var Decorator = ____imported.default;;
+
+var ____imported = JSComet.include('jscomet.core', false, z____memoryImport);
+
+var Controller = ____imported.Controller;;
+
+var UserInRuleDecorator = (function(Decorator){
+"use strict";
+
+var ___privateStatic___ = {};
+function UserInRuleDecorator(ruleName){
+	JSComet.checkClass(this, UserInRuleDecorator);
+	var ___private___ = {};
+	var ___self___ = this;
+	var ___super___ = null;
+
+	var __callSuperConstructor__ = function(){
+
+		Decorator.apply(___self___, arguments);
+		___super___ = JSComet.wrapSuper(___self___);
+		___defineAllProperties___.call(___self___);
+	}
+
+		var ___defineAllProperties___ = function(){
+
+___self___.onFunction =  (function onFunction(target,  key,  descriptor,  superDescriptor){
+  var  z____return = (function onFunction(target, key, descriptor, superDescriptor){
+        
+    if(!(target instanceof Controller)){
+		throw new TypeError("userInRule decorator can only be used in jscomet.core@Controller actions");
+	}
+	var toAsync = function(result){
+		if(result instanceof Promise)
+			return result;
+		return new Promise(((function(_this){ return (function(){return (function (resolve){
+			resolve(result);
+		}).apply(_this,arguments)});})(this)));
+	}
+	var ruleName = this.ruleName;
+    return this.cloneDescriptor(descriptor, {
+      value: function () {
+		var parameters = arguments;
+		var controller = this;
+		return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
+			var ruleResult = UserInRuleDecorator.userIsInRule.call(null, controller, ruleName);
+			toAsync(ruleResult)
+			.then(((function(_this){ return (function(){return (function (isInRule){
+				var result = null;
+				if(isInRule === true){
+					result = descriptor.value.apply(controller, parameters);		
+				}else{
+					result = isInRule;
+				}
+				
+				toAsync(result)
+				.then(((function(_this){ return (function(){return (function (actionResult){
+    return resolve(actionResult);}).apply(_this,arguments)});})(this)))
+				.catch(((function(_this){ return (function(){return (function (error){
+    return reject(error);}).apply(_this,arguments)});})(this)));
+			}).apply(_this,arguments)});})(this)))
+			.catch(((function(_this){ return (function(){return (function (error){
+    return reject(error);}).apply(_this,arguments)});})(this)));
+		}).apply(_this,arguments)});})(this)));
+      }
+    });
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+		};
+	var __callThisConstructor__ = function (){
+		(function(){
+
+  var  z____return = (function constructor(ruleName){
+
+
+if((ruleName != null) &&(typeof ruleName != 'string'))
+ throw "UserInRuleDecorator#constructor - the parameter 'ruleName' must be 'string'";
+
+        
+    if(typeof Decorator != 'undefined') __callSuperConstructor__.call(this);
+    this.name = "userInRule";
+
+    this.ruleName = ruleName;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;
+		}).apply(___self___, arguments);
+
+	};
+return __callThisConstructor__.apply(___self___, arguments);}
+
+UserInRuleDecorator.userIsInRule =  (function userIsInRule(){
+  var  z____return = (function userIsInRule(){
+        
+	  return true;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+UserInRuleDecorator.setRuleValidator =  (function setRuleValidator(action){
+  var  z____return = (function setRuleValidator(action){
+
+
+if(action !== null && !(action instanceof Function))
+ throw "UserInRuleDecorator#setRuleValidator - the parameter 'action' must be 'Function'";
+
+        
+	if(!action){
+		throw new TypeError("userInRule#setRuleValidator action parameter need to be a Function");
+	}
+	UserInRuleDecorator.userIsInRule = action;
+  }).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+JSComet.inherits(UserInRuleDecorator, Decorator);
+
+return UserInRuleDecorator;
+})(Decorator);
+var userInRule = Decorator.decorate(UserInRuleDecorator);
+userInRule.setRuleValidator = UserInRuleDecorator.setRuleValidator;
+
+module.exports['default'] = userInRule;
+
+
+
+
+
+
+
+
+return module.exports;
+}
+};
+
 
 var ____imported = JSComet.include('./core/Decorator', false, z____memoryImport);
 
@@ -912,6 +1047,10 @@ var ____imported = JSComet.include('./core/MemoryCacheDecorator', false, z____me
 
 var memoryCache = ____imported.default;;
 
+var ____imported = JSComet.include('./core/UserInRuleDecorator', false, z____memoryImport);
+
+var userInRule = ____imported.default;;
+
 var abstract = Decorator.decorate(AbstractDecorator);
 module.exports.abstract = abstract;
 
@@ -934,6 +1073,7 @@ function httpGet(url, options){
 	return httpRequest(url, options);
 }
 
+
 module.exports.httpRequest = httpRequest;
 
 
@@ -944,6 +1084,9 @@ module.exports.httpPost = httpPost;
 
 
 module.exports.memoryCache = memoryCache;
+
+
+module.exports.userInRule = userInRule;
 
 
 module.exports.Decorator = Decorator;

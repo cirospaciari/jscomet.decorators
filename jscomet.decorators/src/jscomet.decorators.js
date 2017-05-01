@@ -4,6 +4,7 @@ import SealedDecorator from './core/SealedDecorator';
 import DeprecatedDecorator from './core/DeprecatedDecorator';
 import httpRequest from './core/HttpRequestDecorator';
 import memoryCache from './core/MemoryCacheDecorator';
+import userInRule from './core/UserInRuleDecorator';
 
 export var abstract = Decorator.decorate(AbstractDecorator);
 export var sealed = Decorator.decorate(SealedDecorator);
@@ -20,8 +21,10 @@ function httpGet(url, options){
 	options["method"] = "GET";
 	return httpRequest(url, options);
 }
+
 export httpRequest;
 export httpGet;
 export httpPost;
 export memoryCache;
+export userInRule;
 export Decorator;
