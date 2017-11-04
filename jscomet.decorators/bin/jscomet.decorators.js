@@ -559,10 +559,10 @@ ___self___.onFunction =  (function onFunction(target,  key,  descriptor,  superD
     return this.cloneDescriptor(descriptor, {
       value: function () {
         var values = {};
-
+        var requestUrl = url;
         function replaceUrlHeaderParameter(name, value) {
-          if (url.indexOf("{" + name + "}") != -1)
-            url = url.replace("{" + name + "}", encodeURIComponent((value || "").toString()));
+          if (requestUrl.indexOf("{" + name + "}") != -1)
+            requestUrl = requestUrl.replace("{" + name + "}", encodeURIComponent((value || "").toString()));
           else if (headers) {
             for (var i in headers) {
               if (headers[i] == "{" + name + "}") {
@@ -585,7 +585,7 @@ ___self___.onFunction =  (function onFunction(target,  key,  descriptor,  superD
         }
         return new Promise(((function(_this){ return (function(){return (function (resolve, reject){
           HttpRequestDecorator.lastError = null;
-          request(url, options, values).then(((function(_this){ return (function(){return (function (response){
+          request(requestUrl, options, values).then(((function(_this){ return (function(){return (function (response){
             resolve(response);
           }).apply(_this,arguments)});})(this)))["catch"](((function(_this){ return (function(){return (function (error){
             HttpRequestDecorator.lastError = error;

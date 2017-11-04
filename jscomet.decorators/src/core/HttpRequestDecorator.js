@@ -152,10 +152,10 @@ class HttpRequestDecorator extends Decorator {
     return this.cloneDescriptor(descriptor, {
       value: function () {
         var values = {};
-
+        var requestUrl = url;
         function replaceUrlHeaderParameter(name, value) {
-          if (url.indexOf("{" + name + "}") != -1)
-            url = url.replace("{" + name + "}", encodeURIComponent((value || "").toString()));
+          if (requestUrl.indexOf("{" + name + "}") != -1)
+            requestUrl = requestUrl.replace("{" + name + "}", encodeURIComponent((value || "").toString()));
           else if (headers) {
             for (var i in headers) {
               if (headers[i] == "{" + name + "}") {
@@ -178,7 +178,7 @@ class HttpRequestDecorator extends Decorator {
         }
         return new Promise((resolve, reject) => {
           HttpRequestDecorator.lastError = null;
-          request(url, options, values).then((response) => {
+          request(requestUrl, options, values).then((response) => {
             resolve(response);
           })["catch"]((error) => {
             HttpRequestDecorator.lastError = error;
