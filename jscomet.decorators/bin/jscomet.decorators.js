@@ -887,6 +887,67 @@ return module.exports;
 }
 };
 
+z____memoryImport['/core/StaticDecorator.js'] = {
+ cache: null, code: function(){
+ var module = {exports: {}};
+﻿
+var ____imported = JSComet.include('./core/Decorator.js', false, z____memoryImport);
+
+var Decorator = ____imported.default;;
+
+var StaticDecorator = (function(Decorator){
+"use strict";
+
+var ___privateStatic___ = {};
+function StaticDecorator(){
+	JSComet.checkClass(this, StaticDecorator);
+	var ___private___ = {};
+	var ___self___ = this;
+	var ___super___ = null;
+
+	var __callSuperConstructor__ = function(){
+
+		Decorator.apply(___self___, arguments);
+		___super___ = JSComet.wrapSuper(___self___);
+		___defineAllProperties___.call(___self___);
+	}
+
+		var ___defineAllProperties___ = function(){
+
+___self___.onClass =  (function onClass(target,  type,  baseType){
+  var  z____return = (function onClass(target, type, baseType){
+        
+        throw new TypeError((target.constructor.name)+" - Cannot construct static instances");
+	}).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;});
+		};
+	var __callThisConstructor__ = function (){
+		(function(){
+
+  var  z____return = (function constructor(){
+        
+	 if(typeof Decorator != 'undefined') __callSuperConstructor__.call(this);
+		this.name = "static";
+	}).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
+return z____return;
+		}).apply(___self___, arguments);
+
+	};
+return __callThisConstructor__.apply(___self___, arguments);}
+
+JSComet.inherits(StaticDecorator, Decorator);
+
+return StaticDecorator;
+})(Decorator);
+
+
+module.exports['default'] = StaticDecorator;
+
+
+return module.exports;
+}
+};
+
 z____memoryImport['/core/UserInRuleDecorator.js'] = {
  cache: null, code: function(){
  var module = {exports: {}};
@@ -1031,6 +1092,10 @@ var ____imported = JSComet.include('./core/AbstractDecorator', false, z____memor
 
 var AbstractDecorator = ____imported.default;;
 
+var ____imported = JSComet.include('./core/StaticDecorator', false, z____memoryImport);
+
+var StaticDecorator = ____imported.default;;
+
 var ____imported = JSComet.include('./core/SealedDecorator', false, z____memoryImport);
 
 var SealedDecorator = ____imported.default;;
@@ -1060,6 +1125,8 @@ module.exports.sealed = sealed;
 var deprecated = Decorator.decorate(DeprecatedDecorator);
 module.exports.deprecated = deprecated;
 
+var static = Decorator.decorate(StaticDecorator);
+module.exports.static = static;
 
 
 function httpPost(url, options){
@@ -1090,3 +1157,7 @@ module.exports.userInRule = userInRule;
 
 
 module.exports.Decorator = Decorator;
+
+
+module.exports.static = static;
+
