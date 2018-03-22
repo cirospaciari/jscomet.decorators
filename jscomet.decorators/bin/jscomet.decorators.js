@@ -917,7 +917,7 @@ function StaticDecorator(){
 ___self___.onClass =  (function onClass(target,  type,  baseType){
   var  z____return = (function onClass(target, type, baseType){
         
-        throw new TypeError((target.constructor.name)+" - Cannot construct static instances");
+		throw new TypeError((target.constructor.name)+" - Cannot construct static instances");
 	}).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
 return z____return;});
 		};
@@ -942,7 +942,6 @@ return StaticDecorator;
 
 
 module.exports['default'] = StaticDecorator;
-
 
 return module.exports;
 }
