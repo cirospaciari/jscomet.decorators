@@ -927,7 +927,7 @@ return z____return;});
   var  z____return = (function constructor(){
         
 	 if(typeof Decorator != 'undefined') __callSuperConstructor__.call(this);
-		this.name = "static";
+		this.name = "Static";
 	}).apply(typeof ___self___ == 'undefined' ? this : ___self___, arguments);
 return z____return;
 		}).apply(___self___, arguments);
@@ -1124,8 +1124,8 @@ module.exports.sealed = sealed;
 var deprecated = Decorator.decorate(DeprecatedDecorator);
 module.exports.deprecated = deprecated;
 
-var static = Decorator.decorate(StaticDecorator);
-module.exports.static = static;
+var Static = Decorator.decorate(StaticDecorator);
+module.exports.Static = Static;
 
 
 function httpPost(url, options){
@@ -1158,5 +1158,5 @@ module.exports.userInRule = userInRule;
 module.exports.Decorator = Decorator;
 
 
-module.exports.static = static;
+module.exports.Static = Static;
 

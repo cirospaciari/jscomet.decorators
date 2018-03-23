@@ -4,7 +4,7 @@ class StaticDecorator extends Decorator{
 	
 	constructor(){
 		super();
-		this.name = "static";
+		this.name = "Static";
 	}
 	
 	onClass(target, type, baseType){

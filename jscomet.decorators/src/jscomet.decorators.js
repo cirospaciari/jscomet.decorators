@@ -10,7 +10,7 @@ import userInRule from './core/UserInRuleDecorator';
 export var abstract = Decorator.decorate(AbstractDecorator);
 export var sealed = Decorator.decorate(SealedDecorator);
 export var deprecated = Decorator.decorate(DeprecatedDecorator);
-export var static = Decorator.decorate(StaticDecorator);
+export var Static = Decorator.decorate(StaticDecorator);
 
 function httpPost(url, options){
 	options = options || {};
@@ -29,4 +29,4 @@ export httpPost;
 export memoryCache;
 export userInRule;
 export Decorator;
-export static;
+export Static;
